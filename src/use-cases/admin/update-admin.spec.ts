@@ -40,7 +40,7 @@ describe('Update admin Use Case', () => {
     ).rejects.toBeInstanceOf(AdminAlreadyExistsError)
   })
 
-  it('should be able update people', async () => {
+  it('should be able update admin', async () => {
     const { admin: adminCreated } = await createAdmin.execute({
       email: 'jhondoe@example.com',
       name: 'Jhon Doe',

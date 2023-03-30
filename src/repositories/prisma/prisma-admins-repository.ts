@@ -21,6 +21,13 @@ export class PrismaAdminsRepository implements AdminsRepository {
       data: {
         ...admin,
       },
+      select: {
+        email: true,
+        name: true,
+        id: true,
+        createdAt: true,
+        updatedAt: true,
+      },
     })
 
     return administration

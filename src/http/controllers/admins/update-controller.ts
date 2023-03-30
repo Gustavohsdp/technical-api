@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
+import { AdminAlreadyExistsError } from '@/use-cases/errors/admin-already-exists-error'
 import { makeUpdateAdminUseCase } from '@/use-cases/factories/admin/make-update-admin-use-case'
 
 export async function update(request: FastifyRequest, reply: FastifyReply) {
@@ -19,12 +20,22 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
 
   const updateUseCase = makeUpdateAdminUseCase()
 
-  const { admin } = await updateUseCase.execute({
-    adminId,
-    email,
-    name,
-    password,
-  })
+  try {
+    const { admin } = await updateUseCase.execute({
+      adminId,
+      email,
+      name,
+      password,
+    })
 
-  return reply.status(201).send(admin)
+    return reply.status(201).send(admin)
+  } catch (err) {
+    if (err instanceof AdminAlreadyExistsError) {
+      return reply.status(409).send({
+        message: err.message,
+      })
+    }
+
+    throw err
+  }
 }

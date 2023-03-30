@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
-import { makeFindByEmailAdminUseCase } from '@/use-cases/factories/admin/make-find-by-email-admin-use-case'
+import { makeFindByEmailCustomerUseCase } from '@/use-cases/factories/customer/make-find-by-email-customer-use-case'
 
 export async function findByEmail(
   request: FastifyRequest,
@@ -14,14 +14,14 @@ export async function findByEmail(
 
   const { email } = createQuerySchema.parse(request.query)
 
-  const findByEmailUseCase = makeFindByEmailAdminUseCase()
+  const findByEmailUseCase = makeFindByEmailCustomerUseCase()
 
   try {
-    const { admin } = await findByEmailUseCase.execute({
+    const { customer } = await findByEmailUseCase.execute({
       email,
     })
 
-    return reply.status(201).send(admin)
+    return reply.status(201).send(customer)
   } catch (err) {
     if (err instanceof ResourceNotFoundError) {
       return reply.status(409).send({

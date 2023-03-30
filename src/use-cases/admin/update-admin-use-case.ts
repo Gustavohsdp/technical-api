@@ -1,4 +1,3 @@
-import { Admin } from '@prisma/client'
 import { hash } from 'bcryptjs'
 import { AdminAlreadyExistsError } from '../errors/admin-already-exists-error'
 import { AdminsRepository } from './../../repositories/admins-repository'
@@ -12,7 +11,15 @@ interface UpdateAdminUseCaseRequest {
 }
 
 interface UpdateAdminUseCaseResponse {
-  admin: Admin | undefined
+  admin:
+    | {
+        id: string
+        name: string
+        email: string
+        createdAt: Date
+        updatedAt: Date
+      }
+    | undefined
 }
 
 export class UpdateAdminUseCase {
