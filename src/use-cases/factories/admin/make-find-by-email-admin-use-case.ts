@@ -1,5 +1,5 @@
 import { PrismaAdminsRepository } from '@/repositories/prisma/prisma-admins-repository'
-import { FindByEmailAdminUseCase } from '@/use-cases/admin/find-by-email-use-case'
+import { FindByEmailAdminUseCase } from '@/use-cases/admin/find-by-email-admin-use-case'
 
 export function makeFindByEmailAdminUseCase() {
   const prismaRepository = new PrismaAdminsRepository()

@@ -2,7 +2,7 @@ import { InMemoryAdminsRepository } from '@/repositories/in-memory/in-memory-adm
 import { beforeEach, describe, expect, it } from 'vitest'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 import { CreateAdminUseCase } from './create-admin-use-case'
-import { FindByEmailAdminUseCase } from './find-by-email-use-case'
+import { FindByEmailAdminUseCase } from './find-by-email-admin-use-case'
 
 let adminRepository: InMemoryAdminsRepository
 let createAdmin: CreateAdminUseCase
