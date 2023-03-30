@@ -8,11 +8,11 @@ export async function findByEmail(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const createQuerySchema = z.object({
+  const findQuerySchema = z.object({
     email: z.string().email(),
   })
 
-  const { email } = createQuerySchema.parse(request.query)
+  const { email } = findQuerySchema.parse(request.query)
 
   const findByEmailUseCase = makeFindByEmailAdminUseCase()
 

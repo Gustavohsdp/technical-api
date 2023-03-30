@@ -6,6 +6,7 @@ import { update } from './update-controller'
 
 export async function adminsRoutes() {
   app.post('/admin', create)
+
   app.post('/sessions', authenticate)
 
   app.patch('/admin/:adminId', update)

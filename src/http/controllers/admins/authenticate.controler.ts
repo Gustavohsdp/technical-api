@@ -28,7 +28,7 @@ export async function authenticate(
     const refreshToken = await reply.jwtSign({
       sign: {
         sub: admin.id,
-        expiresIn: '7d',
+        expiresIn: '30d',
       },
     })
 
