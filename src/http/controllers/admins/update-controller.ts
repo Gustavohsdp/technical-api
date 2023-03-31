@@ -28,7 +28,7 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
       password,
     })
 
-    return reply.status(201).send(admin)
+    return reply.status(200).send(admin)
   } catch (err) {
     if (err instanceof AdminAlreadyExistsError) {
       return reply.status(409).send({

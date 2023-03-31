@@ -54,9 +54,10 @@ model Category {
 }
 
 model Order {
-  id         String @id @default(auto()) @map("_id") @db.ObjectId
-  customerId String @db.ObjectId
-  productId  String @db.ObjectId
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  customerId String    @db.ObjectId
+  productId  String    @db.ObjectId
+  canceledAt DateTime?
 
   customer Customer @relation(fields: [customerId], references: [id])
   product  Product  @relation(fields: [productId], references: [id])

@@ -1,7 +1,7 @@
 import { PrismaProductsRepository } from '@/repositories/prisma/prisma-products-repository'
 import { FindBySkuProductUseCase } from '@/use-cases/product/find-by-sku-product-use-case'
 
-export function makeFindBySkuProducUseCase() {
+export function makeFindBySkuProductUseCase() {
   const prismaRepository = new PrismaProductsRepository()
   const useCase = new FindBySkuProductUseCase(prismaRepository)
 

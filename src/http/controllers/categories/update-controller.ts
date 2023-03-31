@@ -24,7 +24,7 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
       categoryId,
     })
 
-    return reply.status(201).send(category)
+    return reply.status(200).send(category)
   } catch (err) {
     if (err instanceof CategoryAlreadyExistsError) {
       return reply.status(409).send({

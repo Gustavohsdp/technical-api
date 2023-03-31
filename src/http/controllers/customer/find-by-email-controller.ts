@@ -21,7 +21,7 @@ export async function findByEmail(
       email,
     })
 
-    return reply.status(201).send(customer)
+    return reply.status(200).send(customer)
   } catch (err) {
     if (err instanceof ResourceNotFoundError) {
       return reply.status(409).send({
