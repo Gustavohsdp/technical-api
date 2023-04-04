@@ -18,7 +18,8 @@ describe('Cancel Order Use Case', () => {
   it('should be able to cancel order', async () => {
     const { order: createdOrder } = await createOrder.execute({
       customerId: randomUUID(),
-      productId: randomUUID(),
+      productIds: [randomUUID()],
+      totalValue: '25,90',
     })
 
     const { order } = await sut.execute({

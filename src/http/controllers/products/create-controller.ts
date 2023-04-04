@@ -9,7 +9,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     name: z.string(),
     description: z.string(),
     sku: z.string(),
-    unitaryValue: z.number(),
+    unitaryValue: z.string(),
     active: z.boolean(),
     categoryId: z.string(),
   })

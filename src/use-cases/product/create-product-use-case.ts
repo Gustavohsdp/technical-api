@@ -6,7 +6,7 @@ interface CreateProductUseCaseRequest {
   name: string
   description: string
   sku: string
-  unitaryValue: number
+  unitaryValue: string
   active: boolean
 
   categoryId: string

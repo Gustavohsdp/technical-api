@@ -7,10 +7,21 @@ import {
 
 export class PrismaOrdersRepository implements OrdersRepository {
   async create(data: CreateOrderProps) {
+    const products = await prisma.product.findMany({
+      where: { id: { in: data.productIds } },
+    })
+
     const order = await prisma.order.create({
       data: {
         customer: { connect: { id: data.customerId } },
-        product: { connect: { id: data.productId } },
+        items: {
+          create: products.map((product) => {
+            return {
+              product: { connect: { id: product.id } },
+            }
+          }),
+        },
+        totalValue: data.totalValue,
       },
     })
 
@@ -18,11 +29,26 @@ export class PrismaOrdersRepository implements OrdersRepository {
   }
 
   async update(id: string, data: UpdateOrderProps) {
+    const products = await prisma.product.findMany({
+      where: { id: { in: data.productIds } },
+    })
+
     const order = await prisma.order.update({
       where: { id },
       data: {
         customer: { connect: { id: data.customerId } },
-        product: { connect: { id: data.productId } },
+        items: {
+          update: products.map((product) => ({
+            where: {
+              orderId: id,
+            },
+            data: {
+              product: { connect: { id: product.id } },
+            },
+          })),
+        },
+
+        totalValue: data.totalValue,
       },
     })
 
@@ -33,6 +59,9 @@ export class PrismaOrdersRepository implements OrdersRepository {
     const orders = await prisma.order.findMany({
       where: {
         canceledAt: null,
+      },
+      include: {
+        items: true,
       },
     })
 

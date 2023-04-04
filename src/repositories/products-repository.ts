@@ -4,7 +4,7 @@ export interface CreateProductProps {
   name: string
   description: string
   sku: string
-  unitaryValue: number
+  unitaryValue: string
   active: boolean
 
   categoryId: string
@@ -16,7 +16,7 @@ export interface UpdateProductProps {
   name: string
   description: string
   sku: string
-  unitaryValue: number
+  unitaryValue: string
   active: boolean
   categoryId: string
 }

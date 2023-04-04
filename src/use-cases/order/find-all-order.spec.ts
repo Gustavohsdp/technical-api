@@ -17,12 +17,14 @@ describe('Find All Orders Use Case', () => {
   it('should be able find all orders', async () => {
     await createOrder.execute({
       customerId: 'd278a7ec-5875-438a-8c2c-507c9594ee07',
-      productId: 'd278a7ec-5875-438a-8c2c-507c9594ee08',
+      totalValue: '100.20',
+      productIds: ['d278a7ec-5875-438a-8c2c-507c9594ee08'],
     })
 
     await createOrder.execute({
       customerId: 'd278a7ec-5875-438a-8c2c-507c9594ee09',
-      productId: 'd278a7ec-5875-438a-8c2c-507c9594ee10',
+      totalValue: '100.20',
+      productIds: ['d278a7ec-5875-438a-8c2c-507c9594ee10'],
     })
 
     const { orders } = await sut.execute()
@@ -31,11 +33,9 @@ describe('Find All Orders Use Case', () => {
     expect(orders).toEqual([
       expect.objectContaining({
         customerId: 'd278a7ec-5875-438a-8c2c-507c9594ee07',
-        productId: 'd278a7ec-5875-438a-8c2c-507c9594ee08',
       }),
       expect.objectContaining({
         customerId: 'd278a7ec-5875-438a-8c2c-507c9594ee09',
-        productId: 'd278a7ec-5875-438a-8c2c-507c9594ee10',
       }),
     ])
   })

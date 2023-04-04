@@ -2,13 +2,15 @@ import { Order } from '@prisma/client'
 
 export interface CreateOrderProps {
   customerId: string
-  productId: string
+  productIds: string[]
+  totalValue: string
   canceledAt?: Date
 }
 
 export interface UpdateOrderProps {
-  productId: string
+  productIds: string[]
   customerId: string
+  totalValue: string
   canceledAt?: Date
 }
 

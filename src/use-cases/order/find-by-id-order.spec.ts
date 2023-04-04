@@ -18,7 +18,8 @@ describe('Find By Id Order Use Case', () => {
   it('should be able find order by id', async () => {
     const { order: orderCreated } = await createOrder.execute({
       customerId: randomUUID(),
-      productId: randomUUID(),
+      productIds: [randomUUID()],
+      totalValue: '29,90',
     })
 
     const { order } = await sut.execute({

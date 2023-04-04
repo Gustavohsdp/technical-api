@@ -11,6 +11,6 @@ export async function productsRoutes() {
   app.patch('/product/:productId', update)
   app.patch('/product/status/:productId', updateStatus)
 
-  app.get('/product/sku', findBySku)
+  app.get('/product/:sku', findBySku)
   app.get('/product', findAll)
 }

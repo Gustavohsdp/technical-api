@@ -12,5 +12,6 @@ export async function categoriesRoutes() {
   app.patch('/category/:categoryId', update)
 
   app.get('/category/name', findByName)
+
   app.get('/category', findAll)
 }

@@ -15,7 +15,8 @@ describe('Create Order Use Case', () => {
   it('should be able to create order', async () => {
     const { order } = await sut.execute({
       customerId: randomUUID(),
-      productId: randomUUID(),
+      productIds: [randomUUID()],
+      totalValue: '26,90',
     })
 
     expect(order.id).toEqual(expect.any(String))

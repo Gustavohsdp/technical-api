@@ -27,11 +27,7 @@ export class PrismaCategoriesRepository implements CategoriesRepository {
   }
 
   async findAll() {
-    const categories = await prisma.category.findMany({
-      include: {
-        products: true,
-      },
-    })
+    const categories = await prisma.category.findMany({})
 
     return categories
   }

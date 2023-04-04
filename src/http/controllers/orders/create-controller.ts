@@ -6,16 +6,20 @@ import { makeCreateOrderUseCase } from '@/use-cases/factories/order/make-create-
 export async function create(request: FastifyRequest, reply: FastifyReply) {
   const createBodySchema = z.object({
     customerId: z.string(),
-    productId: z.string(),
+    productIds: z.array(z.string()).min(1),
+    totalValue: z.string(),
   })
 
-  const { customerId, productId } = createBodySchema.parse(request.body)
+  const { customerId, productIds, totalValue } = createBodySchema.parse(
+    request.body,
+  )
 
   const createUseCase = makeCreateOrderUseCase()
 
   const { order } = await createUseCase.execute({
     customerId,
-    productId,
+    productIds,
+    totalValue,
   })
 
   return reply.status(201).send(order)

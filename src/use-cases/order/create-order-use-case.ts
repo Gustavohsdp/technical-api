@@ -3,7 +3,8 @@ import { OrdersRepository } from './../../repositories/orders-repository'
 
 interface CreateOrderUseCaseRequest {
   customerId: string
-  productId: string
+  productIds: string[]
+  totalValue: string
   canceledAt?: Date
 }
 
@@ -16,12 +17,14 @@ export class CreateOrderUseCase {
 
   async execute({
     customerId,
-    productId,
+    productIds,
     canceledAt,
+    totalValue,
   }: CreateOrderUseCaseRequest): Promise<CreateOrderUseCaseResponse> {
     const order = await this.ordersRepository.create({
       customerId,
-      productId,
+      productIds,
+      totalValue,
       canceledAt,
     })
     return { order }

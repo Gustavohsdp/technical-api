@@ -13,7 +13,8 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     const order = {
       id: randomUUID(),
       customerId: data.customerId,
-      productId: data.productId,
+      productIds: data.productIds.map((productId) => productId),
+      totalValue: data.totalValue,
       canceledAt: null,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -31,7 +32,7 @@ export class InMemoryOrdersRepository implements OrdersRepository {
       this.items[orderIndex] = {
         id,
         customerId: data.customerId,
-        productId: data.productId,
+        totalValue: data.totalValue,
         canceledAt: null,
         createdAt: this.items[orderIndex].createdAt,
         updatedAt: new Date(),
@@ -63,7 +64,7 @@ export class InMemoryOrdersRepository implements OrdersRepository {
       this.items[orderIndex] = {
         id,
         customerId: this.items[orderIndex].customerId,
-        productId: this.items[orderIndex].productId,
+        totalValue: this.items[orderIndex].totalValue,
         canceledAt: new Date(),
         createdAt: this.items[orderIndex].createdAt,
         updatedAt: new Date(),

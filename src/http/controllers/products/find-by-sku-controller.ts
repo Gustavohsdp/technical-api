@@ -5,11 +5,11 @@ import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-err
 import { makeFindBySkuProductUseCase } from '@/use-cases/factories/product/make-find-by-sku-product-use-case'
 
 export async function findBySku(request: FastifyRequest, reply: FastifyReply) {
-  const findQuerySchema = z.object({
+  const findParamsSchema = z.object({
     sku: z.string(),
   })
 
-  const { sku } = findQuerySchema.parse(request.query)
+  const { sku } = findParamsSchema.parse(request.params)
 
   const findBySkuUseCase = makeFindBySkuProductUseCase()
 

@@ -16,9 +16,6 @@ export class PrismaProductsRepository implements ProductsRepository {
         unitaryValue: data.unitaryValue,
         category: { connect: { id: data.categoryId } },
       },
-      include: {
-        orders: true,
-      },
     })
 
     return product
@@ -35,9 +32,6 @@ export class PrismaProductsRepository implements ProductsRepository {
         unitaryValue: data.unitaryValue,
         category: { connect: { id: data.categoryId } },
       },
-      include: {
-        orders: true,
-      },
     })
 
     return product
@@ -47,9 +41,6 @@ export class PrismaProductsRepository implements ProductsRepository {
     const products = await prisma.product.findMany({
       where: {
         active: true,
-      },
-      include: {
-        orders: true,
       },
       orderBy: { id: 'asc' },
     })
@@ -63,9 +54,6 @@ export class PrismaProductsRepository implements ProductsRepository {
       data: {
         active: status,
       },
-      include: {
-        orders: true,
-      },
     })
 
     return product
@@ -74,9 +62,6 @@ export class PrismaProductsRepository implements ProductsRepository {
   async findBySku(sku: string) {
     const product = await prisma.product.findUnique({
       where: { sku },
-      include: {
-        orders: true,
-      },
     })
 
     return product

@@ -5,7 +5,8 @@ interface UpdateOrderUseCaseRequest {
   orderId: string
 
   customerId: string
-  productId: string
+  productIds: string[]
+  totalValue: string
   canceledAt?: Date
 }
 
@@ -19,13 +20,15 @@ export class UpdateOrderUseCase {
   async execute({
     customerId,
     orderId,
-    productId,
+    productIds,
     canceledAt,
+    totalValue,
   }: UpdateOrderUseCaseRequest): Promise<UpdateOrderUseCaseResponse> {
     const order = await this.ordersRepository.update(orderId, {
       customerId,
-      productId,
+      productIds,
       canceledAt,
+      totalValue,
     })
 
     return { order }

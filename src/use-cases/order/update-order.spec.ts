@@ -17,15 +17,17 @@ describe('Update Order Use Case', () => {
   it('should be able update order', async () => {
     const { order: orderCreated } = await createOrder.execute({
       customerId: 'd278a7ec-5875-438a-8c2c-507c9594ee01',
-      productId: 'd278a7ec-5875-438a-8c2c-507c9594ee02',
+      productIds: ['d278a7ec-5875-438a-8c2c-507c9594ee02'],
+      totalValue: '59,90',
     })
 
     const { order } = await sut.execute({
       orderId: orderCreated.id,
       customerId: orderCreated.customerId,
-      productId: 'd278a7ec-5875-438a-8c2c-507c9594ee05',
+      productIds: ['d278a7ec-5875-438a-8c2c-507c9594ee05'],
+      totalValue: '66,85',
     })
 
-    expect(order?.productId).toEqual('d278a7ec-5875-438a-8c2c-507c9594ee05')
+    expect(order?.totalValue).toEqual('66,85')
   })
 })
