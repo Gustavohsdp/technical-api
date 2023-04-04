@@ -7,5 +7,5 @@ export async function findAll(request: FastifyRequest, reply: FastifyReply) {
 
   const { products } = await findAllUseCase.execute()
 
-  return reply.status(201).send(products)
+  return reply.status(200).send(products)
 }
