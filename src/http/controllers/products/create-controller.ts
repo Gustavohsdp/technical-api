@@ -11,10 +11,11 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     sku: z.string(),
     unitaryValue: z.string(),
     active: z.boolean(),
+    imageUrl: z.string().optional(),
     categoryId: z.string(),
   })
 
-  const { active, categoryId, description, name, sku, unitaryValue } =
+  const { active, categoryId, description, name, sku, unitaryValue, imageUrl } =
     createBodySchema.parse(request.body)
 
   try {
@@ -27,6 +28,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       name,
       sku,
       unitaryValue,
+      imageUrl: imageUrl ?? undefined,
     })
 
     return reply.status(201).send(product)

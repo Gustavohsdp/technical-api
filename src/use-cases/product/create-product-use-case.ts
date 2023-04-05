@@ -8,6 +8,7 @@ interface CreateProductUseCaseRequest {
   sku: string
   unitaryValue: string
   active: boolean
+  imageUrl?: string
 
   categoryId: string
 }
@@ -26,6 +27,7 @@ export class CreateProductUseCase {
     name,
     sku,
     unitaryValue,
+    imageUrl,
   }: CreateProductUseCaseRequest): Promise<CreateProductUseCaseResponse> {
     const productWithSameSku = await this.productsRepository.findBySku(sku)
 
@@ -40,6 +42,7 @@ export class CreateProductUseCase {
       name,
       sku,
       unitaryValue,
+      imageUrl,
     })
     return { product }
   }

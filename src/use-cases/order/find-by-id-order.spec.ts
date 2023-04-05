@@ -1,6 +1,7 @@
 import { InMemoryOrdersRepository } from '@/repositories/in-memory/in-memory-orders-repository'
 import { randomUUID } from 'node:crypto'
 import { beforeEach, describe, expect, it } from 'vitest'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 import { CreateOrderUseCase } from './create-order-use-case'
 import { FindByIdOrderUseCase } from './find-by-id-order-use-case'
 
@@ -27,5 +28,19 @@ describe('Find By Id Order Use Case', () => {
     })
 
     expect(order?.id).toEqual(orderCreated.id)
+  })
+
+  it('should be able not found order by id', async () => {
+    await createOrder.execute({
+      customerId: randomUUID(),
+      productIds: [randomUUID()],
+      totalValue: '29,90',
+    })
+
+    await expect(() =>
+      sut.execute({
+        orderId: randomUUID(),
+      }),
+    ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 })

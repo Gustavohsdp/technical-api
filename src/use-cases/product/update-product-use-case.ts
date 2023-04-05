@@ -8,6 +8,7 @@ interface UpdateProductUseCaseRequest {
   name: string
   description: string
   sku?: string
+  imageUrl?: string
   unitaryValue: string
   active: boolean
   categoryId: string
@@ -28,6 +29,7 @@ export class UpdateProductUseCase {
     productId,
     sku,
     unitaryValue,
+    imageUrl,
   }: UpdateProductUseCaseRequest): Promise<UpdateProductUseCaseResponse> {
     let ProductWithSameSku = null
 
@@ -45,6 +47,7 @@ export class UpdateProductUseCase {
       categoryId,
       description,
       sku: sku ?? undefined,
+      imageUrl: imageUrl ?? undefined,
       unitaryValue,
       productId,
     })

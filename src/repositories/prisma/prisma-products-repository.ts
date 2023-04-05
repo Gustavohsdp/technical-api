@@ -14,6 +14,7 @@ export class PrismaProductsRepository implements ProductsRepository {
         name: data.name,
         sku: data.sku,
         unitaryValue: data.unitaryValue,
+        imageUrl: data.imageUrl,
         category: { connect: { id: data.categoryId } },
       },
     })
@@ -29,6 +30,7 @@ export class PrismaProductsRepository implements ProductsRepository {
         description: data.description,
         name: data.name,
         sku: data.sku,
+        imageUrl: data.imageUrl,
         unitaryValue: data.unitaryValue,
         category: { connect: { id: data.categoryId } },
       },

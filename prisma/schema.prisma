@@ -28,6 +28,7 @@ model Product {
   description  String
   sku          String  @unique
   unitaryValue String
+  imageUrl     String?
   categoryId   String  @db.ObjectId
   active       Boolean
 

@@ -6,6 +6,7 @@ export interface CreateProductProps {
   sku: string
   unitaryValue: string
   active: boolean
+  imageUrl?: string
 
   categoryId: string
 }
@@ -19,6 +20,7 @@ export interface UpdateProductProps {
   unitaryValue: string
   active: boolean
   categoryId: string
+  imageUrl?: string
 }
 
 export interface ProductsRepository {

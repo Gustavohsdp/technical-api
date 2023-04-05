@@ -12,13 +12,14 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
     unitaryValue: z.string(),
     active: z.boolean(),
     categoryId: z.string(),
+    imageUrl: z.string().optional(),
   })
 
   const updateParamsSchema = z.object({
     productId: z.string(),
   })
 
-  const { active, categoryId, description, name, sku, unitaryValue } =
+  const { active, categoryId, description, name, sku, unitaryValue, imageUrl } =
     updateBodySchema.parse(request.body)
   const { productId } = updateParamsSchema.parse(request.params)
 
@@ -31,6 +32,7 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
       description,
       name,
       sku: sku ?? undefined,
+      imageUrl: imageUrl ?? undefined,
       unitaryValue,
       productId,
     })
