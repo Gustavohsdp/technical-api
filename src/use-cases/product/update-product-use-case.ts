@@ -7,8 +7,8 @@ interface UpdateProductUseCaseRequest {
 
   name: string
   description: string
-  sku: string
-  unitaryValue: number
+  sku?: string
+  unitaryValue: string
   active: boolean
   categoryId: string
 }
@@ -29,7 +29,11 @@ export class UpdateProductUseCase {
     sku,
     unitaryValue,
   }: UpdateProductUseCaseRequest): Promise<UpdateProductUseCaseResponse> {
-    const ProductWithSameSku = await this.productsRepository.findBySku(sku)
+    let ProductWithSameSku = null
+
+    if (sku) {
+      ProductWithSameSku = await this.productsRepository.findBySku(sku)
+    }
 
     if (ProductWithSameSku) {
       throw new ProductAlreadyExistsError()
@@ -40,7 +44,7 @@ export class UpdateProductUseCase {
       active,
       categoryId,
       description,
-      sku,
+      sku: sku ?? undefined,
       unitaryValue,
       productId,
     })

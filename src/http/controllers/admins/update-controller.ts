@@ -6,9 +6,9 @@ import { makeUpdateAdminUseCase } from '@/use-cases/factories/admin/make-update-
 
 export async function update(request: FastifyRequest, reply: FastifyReply) {
   const updateBodySchema = z.object({
-    name: z.string(),
-    email: z.string().email(),
-    password: z.string(),
+    name: z.string().optional(),
+    email: z.string().email().optional(),
+    password: z.string().optional(),
   })
 
   const updateParamsSchema = z.object({
@@ -23,9 +23,9 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
   try {
     const { admin } = await updateUseCase.execute({
       adminId,
-      email,
-      name,
-      password,
+      email: email ?? undefined,
+      name: name ?? undefined,
+      password: password ?? undefined,
     })
 
     return reply.status(200).send(admin)

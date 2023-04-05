@@ -6,7 +6,7 @@ interface UpdateCustomerUseCaseRequest {
   customerId: string
 
   name: string
-  email: string
+  email?: string
   phone: string
   address: string
 }
@@ -25,9 +25,11 @@ export class UpdateCustomerUseCase {
     phone,
     customerId,
   }: UpdateCustomerUseCaseRequest): Promise<UpdateCustomerUseCaseResponse> {
-    const customerWithSameEmail = await this.customersRepository.findByEmail(
-      email,
-    )
+    let customerWithSameEmail = null
+
+    if (email) {
+      customerWithSameEmail = await this.customersRepository.findByEmail(email)
+    }
 
     if (customerWithSameEmail) {
       throw new CustomerAlreadyExistsError()

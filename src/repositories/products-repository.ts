@@ -15,7 +15,7 @@ export interface UpdateProductProps {
 
   name: string
   description: string
-  sku: string
+  sku?: string
   unitaryValue: string
   active: boolean
   categoryId: string

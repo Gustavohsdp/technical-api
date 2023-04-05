@@ -6,7 +6,7 @@ import { makeFindByNameCategoryUseCase } from '@/use-cases/factories/category/ma
 
 export async function findByName(request: FastifyRequest, reply: FastifyReply) {
   const findQuerySchema = z.object({
-    name: z.string().email(),
+    name: z.string(),
   })
 
   const { name } = findQuerySchema.parse(request.query)

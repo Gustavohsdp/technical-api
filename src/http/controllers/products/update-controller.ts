@@ -8,8 +8,8 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
   const updateBodySchema = z.object({
     name: z.string(),
     description: z.string(),
-    sku: z.string(),
-    unitaryValue: z.number(),
+    sku: z.string().optional(),
+    unitaryValue: z.string(),
     active: z.boolean(),
     categoryId: z.string(),
   })
@@ -30,7 +30,7 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
       categoryId,
       description,
       name,
-      sku,
+      sku: sku ?? undefined,
       unitaryValue,
       productId,
     })

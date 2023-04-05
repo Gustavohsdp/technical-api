@@ -57,9 +57,6 @@ export class PrismaOrdersRepository implements OrdersRepository {
 
   async findAll() {
     const orders = await prisma.order.findMany({
-      where: {
-        canceledAt: null,
-      },
       include: {
         items: true,
       },

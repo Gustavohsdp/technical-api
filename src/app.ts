@@ -33,6 +33,10 @@ app.register(categoriesRoutes)
 app.register(productsRoutes)
 app.register(ordersRoutes)
 
+app.get('/', async (request, reply) => {
+  return 'Hello World'
+})
+
 app.setErrorHandler((error, _request, reply) => {
   if (error instanceof ZodError) {
     return reply

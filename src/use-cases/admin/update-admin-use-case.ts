@@ -5,9 +5,9 @@ import { AdminsRepository } from './../../repositories/admins-repository'
 interface UpdateAdminUseCaseRequest {
   adminId: string
 
-  name: string
-  email: string
-  password: string
+  name?: string
+  email?: string
+  password?: string
 }
 
 interface UpdateAdminUseCaseResponse {
@@ -31,9 +31,17 @@ export class UpdateAdminUseCase {
     password,
     adminId,
   }: UpdateAdminUseCaseRequest): Promise<UpdateAdminUseCaseResponse> {
-    const passwordHash = await hash(password, 6)
+    let passwordHash = null
 
-    const adminWithSameEmail = await this.adminsRepository.findByEmail(email)
+    if (password) {
+      passwordHash = await hash(password, 6)
+    }
+
+    let adminWithSameEmail = null
+
+    if (email) {
+      adminWithSameEmail = await this.adminsRepository.findByEmail(email)
+    }
 
     if (adminWithSameEmail) {
       throw new AdminAlreadyExistsError()
@@ -42,7 +50,7 @@ export class UpdateAdminUseCase {
     const admin = await this.adminsRepository.update(adminId, {
       email,
       name,
-      password: passwordHash,
+      password: passwordHash ?? undefined,
     })
 
     return { admin }

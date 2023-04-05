@@ -32,5 +32,5 @@ export interface OrdersRepository {
   findAll(): Promise<Order[]>
   findById(id: string): Promise<Order | null>
   cancelOrder(id: string): Promise<Order | undefined>
-  findAllOrdersCustomer(customerId: string): Promise<OrderProps[]>
+  findAllOrdersCustomer(customerId: string): Promise<OrderProps[] | Order[]>
 }

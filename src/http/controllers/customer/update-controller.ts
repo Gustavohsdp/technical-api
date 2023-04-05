@@ -7,7 +7,7 @@ import { makeUpdateCustomerUseCase } from '@/use-cases/factories/customer/make-u
 export async function update(request: FastifyRequest, reply: FastifyReply) {
   const updateBodySchema = z.object({
     name: z.string(),
-    email: z.string().email(),
+    email: z.string().email().optional(),
     phone: z.string(),
     address: z.string(),
   })
@@ -24,7 +24,7 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
   try {
     const { customer } = await updateUseCase.execute({
       customerId,
-      email,
+      email: email ?? undefined,
       name,
       address,
       phone,
