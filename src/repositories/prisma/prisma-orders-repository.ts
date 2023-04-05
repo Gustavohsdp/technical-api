@@ -90,4 +90,29 @@ export class PrismaOrdersRepository implements OrdersRepository {
 
     return order
   }
+
+  async findAllOrdersCustomer(customerId: string) {
+    const orders = await prisma.order.findMany({
+      where: {
+        customerId,
+      },
+      select: {
+        id: true,
+        customerId: true,
+        totalValue: true,
+        items: {
+          select: {
+            product: {
+              select: {
+                name: true,
+                unitaryValue: true,
+              },
+            },
+          },
+        },
+      },
+    })
+
+    return orders
+  }
 }

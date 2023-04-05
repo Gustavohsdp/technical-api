@@ -2,6 +2,7 @@ import { Order } from '@prisma/client'
 import { randomUUID } from 'node:crypto'
 import {
   CreateOrderProps,
+  OrderProps,
   OrdersRepository,
   UpdateOrderProps
 } from '../orders-repository'
@@ -74,5 +75,11 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     const order = this.items.find((item) => item.id === id)
 
     return order
+  }
+
+  async findAllOrdersCustomer(
+    customerId: string,
+  ): Promise<OrderProps[] | undefined> {
+    throw new Error('Method not implemented.')
   }
 }
